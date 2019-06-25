@@ -1,8 +1,44 @@
 .App {
   background-color: rgb(175, 175, 175);
   color: black;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid black;
 }
 
 h1 {
   text-align: center;
 }
+
+.boxes-group {
+  display: flex;
+}
+
+.box {
+  flex: 1;
+}
+
+.arrow-box {
+  font-size: 25px;
+  margin: 0px;
+  padding: 0px;
+  text-align: center;
+  font-weight: 900;
+}
+
+.fake-attachment-box {
+  background-color: whitesmoke;
+  flex: 1;
+  margin: 10px 0px 0px 0px;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+.buttons-group {
+  display: flex;
+}
+
+Button {
+  margin: 5px;
+}
+

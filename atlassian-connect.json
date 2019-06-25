@@ -1,0 +1,24 @@
+{
+    "name": "playground",
+    "description": "Atlassian Connect app",
+    "key": "com.example.myapp",
+    "baseUrl": "https://<placeholder-url>",
+    "vendor": {
+        "name": "s950ms20",
+        "url": "http://github.com/s950ms20"
+    },
+    "authentication": {
+        "type": "none"
+    },
+    "apiVersion": 1,
+    "modules": {
+        "generalPages": [{
+            "url": "/",
+            "key": "hello-world",
+            "location": "system.top.navigation.bar",
+            "name": {
+                "value": "Greeting"
+            }
+        }]
+    }
+}
