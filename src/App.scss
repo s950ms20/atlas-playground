@@ -1,5 +1,5 @@
 .App {
-  background-color: rgb(175, 175, 175);
+  background-color: white;
   color: black;
   margin: 10px;
   padding: 10px;
@@ -27,11 +27,12 @@ h1 {
 }
 
 .fake-attachment-box {
-  background-color: whitesmoke;
+  // background-color: whitesmoke;
   flex: 1;
   margin: 10px 0px 0px 0px;
   padding: 10px;
-  border: 1px solid black;
+  // border: 1px solid black;
+  // box-shadow: 2px 2px 5px black;
 }
 
 .buttons-group {

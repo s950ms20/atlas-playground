@@ -83,7 +83,7 @@ export const Playground = (props) => {
                         {selectedAttachmentsLeft
                         .map((attachment, idx) => {
                             return <li key={idx}>{attachment}
-                            <Button appearance="warning"
+                            <Button 
                             onClick={()=>deleteSelectedAttachment(selectedAttachmentsLeft, idx)}
                             >Delete</Button>
                             </li>;
@@ -95,7 +95,7 @@ export const Playground = (props) => {
                         {selectedAttachmentsRight
                         .map((attachment, idx) => {
 							return <li key={idx}>{attachment}
-                            <Button appearance="warning"
+                            <Button 
                             onClick={()=>deleteSelectedAttachment(selectedAttachmentsRight, idx)}
                             >Delete</Button>
                             </li>;
@@ -104,7 +104,7 @@ export const Playground = (props) => {
 				</div>
 			</div>
             <div className="buttons-group">
-                <ButtonGroup appearance="primary">
+                <ButtonGroup>
                     <Button onClick={()=>{copyAttachments()}}>Copy</Button>
                     <Button>Cancel</Button>
                     <Button>Acept</Button>
