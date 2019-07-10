@@ -24,7 +24,7 @@ const Playground = () => {
   const som1 = 'https://s950ms20.atlassian.net/rest/api/3/issue/SOM-1';
   const [projectKey, setProjectKey] = React.useState('');
   const [projectId, setProjectId] = React.useState('');
-
+  const [atlassianAccountId, setAtlassianAccountId] = React.useState('');
 
   React.useEffect(
     () => {
@@ -34,26 +34,32 @@ const Playground = () => {
           setProjectId(ctx.jira.project.id);
           console.log(`KEY: ${projectKey}, ID: ${projectId}`);
         });
-      };
+        window.AP.getCurrentUser(usr => setAtlassianAccountId(usr));
+};
 
       getProjectData();
 
-      window.AP.request({
-        url: `${baseURL}/${projectKey}`,
-        type: 'GET',
-        header: { 'x-atlassian-force-account-id': true }
-      })
-      .then(data => console.log(`DATA: ${data.body}`))
-        .catch(e => console.log(`ERROR: ${e.err}`));
+//       window.AP.request({
+//         url: `${baseURL}/${projectKey}`,
+//         type: 'GET',
+//         header: {
+//  'x-atlassian-force-account-id': true,
+//         Authorization: 'Basic',
+//         admin: 'admin',
+//         'Content-Type': 'application/json'
+//       },
+//       })
+//       .then(data => console.log(`DATA: ${data.body}`))
+//         .catch(e => console.log(`ERROR: ${e.err}`));
 
 
-        window.AP.request({
-          url: som1,
-          type: 'GET',
-          header: { 'x-atlassian-force-account-id': true }
-        })
-        .then(data => console.log(`DATA: ${data.body}`))
-          .catch(e => console.log(`ERROR: ${e.err}`));
+//         window.AP.request({
+//           url: som1,
+//           type: 'GET',
+//           header: { 'x-atlassian-force-account-id': true }
+//         })
+//         .then(data => console.log(`DATA: ${data.body}`))
+//           .catch(e => console.log(`ERROR: ${e.err}`));
       }, []
   );
 
@@ -130,6 +136,30 @@ const Playground = () => {
       setSelectedAttachmentsRight(updatedBox);
     }
   };
+
+  const request = () => new Promise((resolve, reject) => {
+      window.AP.request({
+        url: 'https://s950ms20.atlassian.net/rest/api/3/issue/SOM-1',
+        header: { 'x-atlassian-force-account-id': true },
+        success: (responetext, responseStatusText, response) => {
+          if (response.status === 404) {
+            return reject(response);
+          }
+
+          try {
+            const payload = JSON.parse(responetext);
+            const dataObj = { data: payload };
+            return resolve(dataObj);
+          } catch (error) {
+ return reject(error);
+          }
+        },
+        error(error) {
+          return reject(error);
+        }
+      }).then(data => console.log(data));
+    });
+
 
   return (
     <React.Fragment>
@@ -213,15 +243,15 @@ Copy
           <Button> Cancel </Button>
           <Button> Acept </Button>
           <Button onClick={
-        () => { window.AP.context.getContext(ctx => console.log(`KEY: ${projectKey} ID:${projectId}`)); }}
+        () => { console.log(`KEY:${projectKey} ID:${projectId}`); }}
           >
 Test #1
           </Button>
-          {/* <Button
-            onClick={() => { console.log(`${baseURL}/${projectKey}`); }}
+          <Button
+            onClick={() => request()}
           >
-      Test #2
-          </Button> */}
+     Request
+          </Button>
         </ButtonGroup>
       </div>
 
